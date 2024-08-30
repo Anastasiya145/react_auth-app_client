@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { routes } from "../router/routes";
-import { Stack, Typography, Button, Box } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";

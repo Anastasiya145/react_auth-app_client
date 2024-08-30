@@ -31,6 +31,7 @@ const CustomTextField: React.FC<CustomTextFieldWithLabelProps> = ({
       error={isTouched && isError}
       helperText={isTouched && error}
       autoComplete={type}
+      autoFocus
       sx={{ ...sx }}
     />
   );
