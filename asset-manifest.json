@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.fd0f8457.js",
-    "index.html": "/index.html",
-    "main.fd0f8457.js.map": "/static/js/main.fd0f8457.js.map"
+    "main.js": "/react_auth-app_client/static/js/main.fd0f8457.js",
+    "index.html": "/react_auth-app_client/index.html",
+    "main.fd0f8457.js.map": "/react_auth-app_client/static/js/main.fd0f8457.js.map"
   },
   "entrypoints": [
     "static/js/main.fd0f8457.js"
