@@ -52,5 +52,6 @@ export const lightModeThemeValues = {
 
   borderStyle: {
     main: "2px solid #ADADAD",
+    light: "1px solid #DADCE0",
   },
 };

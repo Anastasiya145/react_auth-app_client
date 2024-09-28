@@ -13,7 +13,7 @@ Welcome to the Sign-In App project! This is a full-stack application built with 
 
 ## 🔗 Live Demo
 
-- **Frontend**: [Sign-In App (Client)](https://anastasiya145.github.io/sign-in)
+- **Frontend**: [Sign-In App (Client)](https://anastasiya145.github.io/react_auth-app_client/#/sign-in)
 - **Backend**: [Sign-In App (Server)](https://node-auth-app-server.vercel.app/)
 
 

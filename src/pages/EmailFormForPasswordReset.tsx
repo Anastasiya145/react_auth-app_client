@@ -21,6 +21,7 @@ const EmailFormForPasswordReset: FC = () => {
     validationSchema: Yup.object().shape({
       email: Yup.string()
         .email("Invalid email address")
+        .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address")
         .required("Email is required"),
     }),
     onSubmit: async (values) => {

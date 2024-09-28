@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Stack, Link, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { routes } from "../router/routes";
 import LoginLayout from "../layout/LoginLayout";
 import AvatarWithText from "../components/AvatarWithText";
@@ -9,6 +9,8 @@ import CustomTextField from "../components/CustomTextField";
 import { useAuthContext } from "../context/AuthProvider";
 import PasswordField from "../components/PasswordField";
 import { LoadingButton } from "@mui/lab";
+import { Link } from "react-router-dom";
+import GoogleSignUpButton from "../components/ButtonSignUpWithGoogle";
 
 interface FormValues {
   email: string;
@@ -30,6 +32,7 @@ const SignUp: FC = () => {
     validationSchema: Yup.object().shape({
       email: Yup.string()
         .email("Invalid email address")
+        .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address")
         .required("Email is required"),
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
@@ -76,12 +79,10 @@ const SignUp: FC = () => {
           <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
             Check your email
           </Typography>
-          <Typography mt={1}>
+          <Typography mt={1} mb={4}>
             We have sent you an email with the activation link
           </Typography>
-          <Link href={routes.signIn} mt={4}>
-            Sign in
-          </Link>
+          <Link to={routes.signIn}>Sign in</Link>
         </Stack>
       ) : (
         <>
@@ -115,9 +116,11 @@ const SignUp: FC = () => {
               Sign Up
             </LoadingButton>
             <Stack>
-              <Link href={routes.signIn} variant="body2">
-                Already have an account? Sign in
-              </Link>
+              <Link to={routes.signIn}>Already have an account? Sign in</Link>
+              <Stack spacing={1} mt={3}>
+                <Typography variant="body2">OR</Typography>
+                <GoogleSignUpButton />
+              </Stack>
             </Stack>
           </Box>
         </>

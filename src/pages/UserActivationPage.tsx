@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { Stack, Typography, Link } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Stack, Typography } from "@mui/material";
+import { useParams, Link } from "react-router-dom";
 import LoginLayout from "../layout/LoginLayout";
 import { routes } from "../router/routes";
 import { useAuthContext } from "../context/AuthProvider";
@@ -21,7 +21,7 @@ const UserActivationPage: FC = () => {
     };
 
     activationToken && userActivation(activationToken);
-  }, []);
+  }, [activationToken, activateUser]);
 
   return (
     <LoginLayout>
@@ -49,11 +49,7 @@ const UserActivationPage: FC = () => {
                 ? "Your account now is activated"
                 : "Wrong activation link"}
             </Typography>
-            {isActivated && (
-              <Link href={routes.signIn} mt={1}>
-                Sign in
-              </Link>
-            )}
+            {isActivated && <Link to={routes.signIn}>Sign in</Link>}
           </Stack>
         )}
       </Stack>

@@ -5,6 +5,7 @@ declare module "@mui/material/styles" {
   interface Theme {
     borderStyle: {
       main: string;
+      light: string;
     };
     background: {
       default: string;

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { Stack, Typography, Link } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Stack, Typography } from "@mui/material";
+import { useParams, Link } from "react-router-dom";
 import LoginLayout from "../layout/LoginLayout";
 import { routes } from "../router/routes";
 import { useAuthContext } from "../context/AuthProvider";
@@ -19,14 +19,14 @@ const ResetPassword: FC = () => {
   const [isLinkValid, setIsLinkValid] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
-  const sendToken = async () => {
-    const { isSuccess } = await verifyResetPasswordToken(resetPasswordToken);
-    setIsLinkValid(isSuccess);
-  };
-
   useEffect(() => {
+    const sendToken = async () => {
+      const { isSuccess } = await verifyResetPasswordToken(resetPasswordToken);
+      setIsLinkValid(isSuccess);
+    };
+
     sendToken();
-  }, []);
+  }, [resetPasswordToken, verifyResetPasswordToken]);
 
   const handlePasswordReset = async (password: string) => {
     if (resetPasswordToken) {
@@ -83,9 +83,7 @@ const ResetPassword: FC = () => {
             >
               Wrong link for reset password
             </Typography>
-            <Link href={routes.signIn} mt={1}>
-              Sign in
-            </Link>
+            <Link to={routes.signIn}>Sign in</Link>
           </Stack>
         )}
         {isLinkValid && isDone && (
@@ -96,9 +94,7 @@ const ResetPassword: FC = () => {
             >
               Your password was successfully changed
             </Typography>
-            <Link href={routes.signIn} mt={1}>
-              Sign in
-            </Link>
+            <Link to={routes.signIn}>Sign in</Link>
           </Stack>
         )}
       </Stack>

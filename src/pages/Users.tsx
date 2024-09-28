@@ -9,14 +9,14 @@ const Users: FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const { handleRequest, isLoading } = useHandleRequest();
 
-  const fetchUsers = () =>
-    handleRequest(userService.getAll(), (response) => {
-      setUsers(response);
-    });
-
   useEffect(() => {
+    const fetchUsers = () =>
+      handleRequest(userService.getAll(), (response) => {
+        setUsers(response);
+      });
+
     fetchUsers();
-  }, []);
+  }, [handleRequest]);
 
   return (
     <MainLayout>

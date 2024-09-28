@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Grid, Typography, Link } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { routes } from "../router/routes";
 import LoginLayout from "../layout/LoginLayout";
@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../components/CustomTextField";
 import PasswordField from "../components/PasswordField";
+import { Link } from "react-router-dom";
 
 interface FormValues {
   email: string;
@@ -29,6 +30,7 @@ const SignIn: FC = () => {
     validationSchema: Yup.object().shape({
       email: Yup.string()
         .email("Invalid email address")
+        .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address")
         .required("Email is required"),
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
@@ -89,14 +91,10 @@ const SignIn: FC = () => {
           </LoadingButton>
           <Grid container>
             <Grid item xs>
-              <Link href={routes.resetPassword.main} variant="body2">
-                Forgot password?
-              </Link>
+              <Link to={routes.resetPassword.main}>Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link href={routes.signUp} variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <Link to={routes.signUp}>{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </Box>
