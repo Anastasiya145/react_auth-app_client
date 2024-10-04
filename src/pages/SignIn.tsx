@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { routes } from "../router/routes";
 import LoginLayout from "../layout/LoginLayout";
@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import CustomTextField from "../components/CustomTextField";
 import PasswordField from "../components/PasswordField";
 import { Link } from "react-router-dom";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 
 interface FormValues {
   email: string;
@@ -89,14 +90,19 @@ const SignIn: FC = () => {
           >
             Sign In
           </LoadingButton>
+
           <Grid container>
             <Grid item xs>
               <Link to={routes.resetPassword.main}>Forgot password?</Link>
             </Grid>
-            <Grid item>
+            <Grid item xs>
               <Link to={routes.signUp}>{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
+
+          <Stack spacing={1} mt={3} width="100%">
+            <GoogleSignInButton />
+          </Stack>
         </Box>
       </>
     </LoginLayout>

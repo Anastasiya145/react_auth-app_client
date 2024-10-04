@@ -1,12 +1,14 @@
 import { FC, ReactNode, createContext, useContext, useState } from "react";
+import useHandleRequest from "../hooks/useHandleRequest";
 import { authService } from "../services/authService";
 import { accessTokenService } from "../services/accessTokenService";
-import useHandleRequest from "../hooks/useHandleRequest";
 
 interface RequestResult {
   isSuccess: boolean;
   errors: CustomServerErrors | null;
 }
+
+type LoginProps = { accessToken: string; user: User };
 
 interface AuthContextType {
   user: User | null;
@@ -49,28 +51,34 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const registration = (userData: UserData) =>
     handleRequest(authService.register(userData), () => {});
+
   const activateUser = (activationToken: string) =>
     handleRequest(authService.activate(activationToken), () => {});
+
   const login = (userData: UserData) =>
     handleRequest(
       authService.login(userData),
-      ({ accessToken, user }: { accessToken: string; user: User }) => {
+      ({ accessToken, user }: LoginProps) => {
         accessTokenService.save(accessToken);
         setUser(user);
       }
     );
+
   const sendRecoveringPasswordLink = (email: string) =>
     handleRequest(authService.sendResetEmailForPassword({ email }), () => {});
+
   const verifyResetPasswordToken = (resetPasswordToken: string | undefined) =>
     handleRequest(
       authService.checkResetPasswordToken(resetPasswordToken),
       () => {}
     );
+
   const resetPassword = (password: string, resetPasswordToken: string) =>
     handleRequest(
       authService.resetPassword({ password }, resetPasswordToken),
       () => {}
     );
+
   const logout = () =>
     handleRequest(authService.logout(), () => {
       accessTokenService.remove();

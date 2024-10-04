@@ -10,7 +10,6 @@ import { useAuthContext } from "../context/AuthProvider";
 import PasswordField from "../components/PasswordField";
 import { LoadingButton } from "@mui/lab";
 import { Link } from "react-router-dom";
-import GoogleSignUpButton from "../components/ButtonSignUpWithGoogle";
 
 interface FormValues {
   email: string;
@@ -117,10 +116,6 @@ const SignUp: FC = () => {
             </LoadingButton>
             <Stack>
               <Link to={routes.signIn}>Already have an account? Sign in</Link>
-              <Stack spacing={1} mt={3}>
-                <Typography variant="body2">OR</Typography>
-                <GoogleSignUpButton />
-              </Stack>
             </Stack>
           </Box>
         </>
