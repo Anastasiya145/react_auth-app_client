@@ -2,6 +2,7 @@ import { FC, ReactNode, createContext, useContext, useState } from "react";
 import useHandleRequest from "../hooks/useHandleRequest";
 import { authService } from "../services/authService";
 import { accessTokenService } from "../services/accessTokenService";
+import { authGoogleService } from "../services/authGoogleService";
 
 interface RequestResult {
   isSuccess: boolean;
@@ -15,6 +16,7 @@ interface AuthContextType {
   registration: (userData: UserData) => Promise<RequestResult>;
   activateUser: (activationToken: string) => Promise<RequestResult>;
   login: (userData: UserData) => Promise<RequestResult>;
+  loginViaGoogle: (tokenId: string) => Promise<RequestResult>;
   sendRecoveringPasswordLink: (email: string) => Promise<RequestResult>;
   resetPassword: (
     password: string,
@@ -64,6 +66,15 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
       }
     );
 
+  const loginViaGoogle = (tokenId: string) =>
+    handleRequest(
+      authGoogleService.googleLogin({ tokenId }),
+      ({ accessToken, user }: LoginProps) => {
+        accessTokenService.save(accessToken);
+        setUser(user);
+      }
+    );
+
   const sendRecoveringPasswordLink = (email: string) =>
     handleRequest(authService.sendResetEmailForPassword({ email }), () => {});
 
@@ -92,6 +103,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         registration,
         activateUser,
         login,
+        loginViaGoogle,
         sendRecoveringPasswordLink,
         verifyResetPasswordToken,
         resetPassword,
